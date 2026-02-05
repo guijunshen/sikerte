@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[网站名称] | [网站描述]</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #dbeafe;
+            --secondary-color: #10b981;
+            --secondary-dark: #0d9668;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .logo-text h1 {
+            font-size: 24px;
+            background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .language-switcher {
+            display: flex;
+            gap: 2px;
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            padding: 2px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .lang-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .lang-btn:hover:not(.active) {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+        }
+        
+        .github-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        
+        .github-link:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+        }
+        
+        /* 搜索区域 */
+        .search-section {
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .search-section h2 {
+            font-size: 42px;
+            margin-bottom: 16px;
+            background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+        
+        .search-section p {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-size: 18px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .search-box {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 18px 20px 18px 55px;
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-color);
+            font-size: 16px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+        
+        .search-filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .filter-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--primary-color);
+            background-color: var(--primary-light);
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .search-results-info {
+            text-align: left;
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 0 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        /* 分类导航 */
+        .categories-section {
+            padding: 30px 0;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--primary-color);
+        }
+        
+        .view-all {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+        
+        .view-all:hover {
+            gap: 10px;
+        }
+        
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .category-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .category-btn:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .category-btn.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 工具展示 */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .tool-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow);
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .tool-card-header {
+            padding: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tool-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .tool-info {
+            flex: 1;
+        }
+        
+        .tool-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .tool-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        
+        .tool-badge {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .tool-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .tool-card-body {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        .tool-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tool-tag {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .tool-tag.domestic {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--secondary-dark);
+        }
+        
+        .tool-tag.free {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+        
+        .tool-tag.paid {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .tool-features {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .tool-features li {
+            padding: 8px 0;
+            font-size: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: var(--text-color);
+        }
+        
+        .tool-features li i {
+            color: var(--primary-color);
+            font-size: 14px;
+            margin-top: 3px;
+        }
+        
+        .tool-card-footer {
+            padding: 20px;
+            background-color: #f8fafc;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .tool-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .tool-link {
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tool-link:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .tool-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--warning-color);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        /* 分页 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 60px;
+        }
+        
+        .page-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .page-btn:hover {
+            border-color: var(--primary-color);
+            background-color: var(--primary-light);
+        }
+        
+        .page-btn.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: #1e293b;
+            padding: 60px 0 30px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #94a3b8;
+            margin-bottom: 12px;
+            display: block;
+            font-size: 14px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .footer-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .footer-badges img {
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+        
+        .footer-badges img:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .security-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .security-info img {
+            width: 150px;
+            height: auto;
+        }
+        
+        .security-text {
+            flex: 1;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        
+        .copyright a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .search-section h2 {
+                font-size: 32px;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .categories {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .tool-card-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .tool-title-row {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            
+            .tool-card-footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .tool-actions {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        /* 工具提示 */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--text-color);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 13px;
+            font-weight: normal;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* 高亮搜索词 */
+        .highlight {
+            background-color: rgba(255, 234, 0, 0.3);
+            padding: 1px 3px;
+            border-radius: 3px;
+        }
+        
+        /* 加载动画 */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            font-size: 18px;
+            color: var(--text-secondary);
+            grid-column: 1 / -1;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">T</div>
+                <div class="logo-text">
+                    <h1>网站名称</h1>
+                    <p>网站描述或标语</p>
+                </div>
+            </a>
+            <div class="header-actions">
+                <div class="language-switcher">
+                    <button class="lang-btn active" data-lang="zh-CN">简</button>
+                    <button class="lang-btn" data-lang="zh-TW">繁</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <a href="https://github.com" target="_blank" class="github-link">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 搜索区域 -->
+    <section class="search-section">
+        <div class="container">
+            <h2 id="main-title">发现最佳资源</h2>
+            <p id="sub-title">精选XX类XXX款实用工具，超过XX%为优质产品，助力高效开发</p>
+            
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-input" placeholder="搜索资源名称、类别或描述...">
+            </div>
+            
+            <div class="search-filters">
+                <button class="filter-btn active" data-filter="all">全部资源</button>
+                <button class="filter-btn" data-filter="domestic">优质资源</button>
+                <button class="filter-btn" data-filter="free">免费资源</button>
+                <button class="filter-btn" data-filter="new">最近更新</button>
+                <button class="filter-btn" data-filter="popular">热门推荐</button>
+            </div>
+            
+            <div class="search-results-info" id="search-results-info">
+                显示全部 <span id="tools-count">XX</span> 个资源
+            </div>
+        </div>
+    </section>
+
+    <!-- 分类导航 -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-th-large"></i> <span id="category-title">资源分类</span></h2>
+                <a href="#" class="view-all">
+                    <span>查看全部</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="categories" id="categories-container">
+                <!-- 分类按钮将通过JS动态生成 -->
+            </div>
+            
+            <div class="tools-grid" id="tools-container">
+                <!-- 资源卡片将通过JS动态生成 -->
+            </div>
+            
+            <div class="loading hidden" id="loading-indicator">
+                <div class="spinner"></div>
+                <p>加载资源数据中...</p>
+            </div>
+            
+            <div class="pagination" id="pagination">
+                <!-- 分页按钮将通过JS动态生成 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>公司名称</h3>
+                    <p>公司描述或业务介绍，专注于XX领域的资源整理、推荐与测评。</p>
+                    <p><i class="fas fa-globe"></i> 域名: example.com</p>
+                    <p><i class="fas fa-file-alt"></i> 备案号: <a href="https://beian.miit.gov.cn/" target="_blank">XXICP备XXXXXXX号-X</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> 地址: XX市XX区XX路XX号</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>快速链接</h3>
+                    <a href="#"><i class="fas fa-chevron-right"></i> 网站首页</a>
+                    <a href="#"><i class="fas fa-chevron-right"></i> 资源分类</a>
+                    <a href="#"><i class="fas fa-chevron-right"></i> 优质资源推荐</a>
+                    <a href="#"><i class="fas fa-chevron-right"></i> 新资源提交</a>
+                    <a href="#"><i class="fas fa-chevron-right"></i> 联系我们</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>徽章与认证</h3>
+                    // 使用时应替换为实际内容
+                    <div class="footer-badges">
+                        <a href="#" target="_blank">
+                            <img src="https://www.example.com" alt="域名年龄" />
+                        </a>
+                        <a href="#" target="_blank">
+                            <img src="https://www.example.com" alt="SSL证书状态" />
+                        </a>
+                    </div>
+                    
+                    <div class="security-info">
+                        <div>
+                            <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 10px;">安全服务提供</p>
+                            <a href="#" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
+                                <img src="https://www.example.com" alt="安全服务商" />
+                            </a>
+                        </div>
+                        <div class="security-text">
+                            <p style="color: #94a3b8; font-size: 0.8rem; margin-top: 8px;">网络安全与性能优化</p>
+                            <p style="color: #64748b; font-size: 0.7rem;">* 公司名称、徽标和相关产品是公司的商标或注册商标</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>Copyright © 2026 公司名称. All rights reserved.</p>
+                <p>本网站推荐的资源版权归原作者所有，本站仅提供信息导航服务。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 多语言文本
+        const translations = {
+            "zh-CN": {
+                "main-title": "发现最佳资源",
+                "sub-title": "精选XX类XXX款实用资源，超过XX%为优质产品，助力高效开发",
+                "category-title": "资源分类",
+                "search-placeholder": "搜索资源名称、类别或描述...",
+                "all-tools": "全部资源",
+                "view-details": "访问官网",
+                "domestic": "优质",
+                "free": "免费",
+                "paid": "付费",
+                "open-source": "开源",
+                "new": "新上线",
+                "popular": "热门",
+                "no-results": "未找到匹配的资源，请尝试其他搜索词",
+                "loading": "加载资源数据中...",
+                "tools-count": "资源总数",
+                "categories-count": "分类数量",
+                "domestic-count": "优质资源",
+                "updated-today": "今日更新",
+                "showing-results": "显示 {count} 个结果",
+                "view-all": "查看全部",
+                "filter-all": "全部资源",
+                "filter-domestic": "优质资源",
+                "filter-free": "免费资源",
+                "filter-new": "最近更新",
+                "filter-popular": "热门推荐"
+            },
+            "zh-TW": {
+                "main-title": "發現最佳資源",
+                "sub-title": "精選XX類XXX款實用資源，超過XX%為優質產品，助力高效開發",
+                "category-title": "資源分類",
+                "search-placeholder": "搜尋資源名稱、類別或描述...",
+                "all-tools": "全部資源",
+                "view-details": "訪問官網",
+                "domestic": "優質",
+                "free": "免費",
+                "paid": "付費",
+                "open-source": "開源",
+                "new": "新上線",
+                "popular": "熱門",
+                "no-results": "未找到匹配的資源，請嘗試其他搜尋詞",
+                "loading": "載入資源資料中...",
+                "tools-count": "資源總數",
+                "categories-count": "分類數量",
+                "domestic-count": "優質資源",
+                "updated-today": "今日更新",
+                "showing-results": "顯示 {count} 個結果",
+                "view-all": "查看全部",
+                "filter-all": "全部資源",
+                "filter-domestic": "優質資源",
+                "filter-free": "免費資源",
+                "filter-new": "最近更新",
+                "filter-popular": "熱門推薦"
+            },
+            "en": {
+                "main-title": "Discover the Best Resources",
+                "sub-title": "Selected XX categories XXX practical resources, over XX% are high-quality products to help you develop efficiently",
+                "category-title": "Resource Categories",
+                "search-placeholder": "Search resource name, category or description...",
+                "all-tools": "All Resources",
+                "view-details": "Visit Website",
+                "domestic": "Premium",
+                "free": "Free",
+                "paid": "Paid",
+                "open-source": "Open Source",
+                "new": "New",
+                "popular": "Popular",
+                "no-results": "No matching resources found, please try other search terms",
+                "loading": "Loading resources...",
+                "tools-count": "Total Resources",
+                "categories-count": "Categories",
+                "domestic-count": "Premium Resources",
+                "updated-today": "Updated Today",
+                "showing-results": "Showing {count} results",
+                "view-all": "View All",
+                "filter-all": "All Resources",
+                "filter-domestic": "Premium Resources",
+                "filter-free": "Free Resources",
+                "filter-new": "Recently Updated",
+                "filter-popular": "Popular Resources"
+            }
+        };
+
+        // 当前语言
+        let currentLang = "zh-CN";
+        
+        // 分页设置
+        let currentPage = 1;
+        const toolsPerPage = 12;
+        let filteredTools = [];
+        let currentCategory = "all";
+        let currentFilter = "all";
+        let currentSearchTerm = "";
+
+        // 分类数据 - 示例分类，可自定义
+        const categories = [
+            { id: "category-1", name: "分类一", icon: "fa-globe", count: 10 },
+            { id: "category-2", name: "分类二", icon: "fa-cogs", count: 8 },
+            { id: "category-3", name: "分类三", icon: "fa-code", count: 12 },
+            { id: "category-4", name: "分类四", icon: "fa-paint-brush", count: 6 },
+            { id: "category-5", name: "分类五", icon: "fa-tools", count: 9 },
+            { id: "category-6", name: "分类六", icon: "fa-database", count: 7 },
+            { id: "category-7", name: "分类七", icon: "fa-server", count: 11 },
+            { id: "category-8", name: "分类八", icon: "fa-link", count: 5 }
+        ];
+
+        // 示例资源数据 - 可根据需要修改
+        const allTools = [
+            { id: 1, name: "示例资源一", category: "category-1", description: "这是一个示例资源，用于展示模板效果", tags: ["免费", "优质"], domestic: true, rating: 4.5, features: ["功能一", "功能二", "功能三"], icon: "fa-globe", url: "#", isNew: true, isPopular: true },
+            { id: 2, name: "示例资源二", category: "category-1", description: "另一个示例资源，展示不同标签效果", tags: ["付费", "开源"], domestic: false, rating: 4.2, features: ["特性A", "特性B", "特性C"], icon: "fa-code", url: "#", isNew: false, isPopular: true },
+            { id: 3, name: "示例资源三", category: "category-2", description: "第三个示例资源，展示更多样式变化", tags: ["免费", "优质", "开源"], domestic: true, rating: 4.7, features: ["功能X", "功能Y", "功能Z"], icon: "fa-tools", url: "#", isNew: true, isPopular: false },
+            { id: 4, name: "示例资源四", category: "category-2", description: "第四个示例资源，展示完整功能", tags: ["付费"], domestic: false, rating: 4.0, features: ["高级功能", "技术支持", "定期更新"], icon: "fa-server", url: "#", isNew: false, isPopular: false },
+            { id: 5, name: "示例资源五", category: "category-3", description: "第五个示例资源，展示不同类别", tags: ["免费"], domestic: true, rating: 4.3, features: ["简单易用", "性能优异", "文档完善"], icon: "fa-database", url: "#", isNew: false, isPopular: true },
+            { id: 6, name: "示例资源六", category: "category-3", description: "第六个示例资源，展示更多变化", tags: ["付费", "优质"], domestic: false, rating: 4.6, features: ["企业级功能", "高可用性", "专业支持"], icon: "fa-cloud", url: "#", isNew: true, isPopular: true },
+            { id: 7, name: "示例资源七", category: "category-4", description: "第七个示例资源，展示不同图标", tags: ["免费", "开源"], domestic: true, rating: 4.1, features: ["社区活跃", "插件丰富", "跨平台"], icon: "fa-paint-brush", url: "#", isNew: false, isPopular: false },
+            { id: 8, name: "示例资源八", category: "category-4", description: "第八个示例资源，展示完整布局", tags: ["付费", "优质"], domestic: false, rating: 4.8, features: ["设计精美", "用户体验好", "响应式"], icon: "fa-rocket", url: "#", isNew: true, isPopular: true },
+            { id: 9, name: "示例资源九", category: "category-5", description: "第九个示例资源，展示多语言效果", tags: ["免费"], domestic: true, rating: 4.4, features: ["多语言支持", "国际化", "本地化"], icon: "fa-language", url: "#", isNew: false, isPopular: false },
+            { id: 10, name: "示例资源十", category: "category-5", description: "第十个示例资源，展示搜索功能", tags: ["付费", "开源"], domestic: false, rating: 4.9, features: ["强大搜索", "智能推荐", "个性化"], icon: "fa-search", url: "#", isNew: false, isPopular: true },
+            { id: 11, name: "示例资源十一", category: "category-6", description: "第十一个示例资源，展示筛选功能", tags: ["免费", "优质"], domestic: true, rating: 4.2, features: ["多条件筛选", "排序功能", "导出数据"], icon: "fa-filter", url: "#", isNew: true, isPopular: false },
+            { id: 12, name: "示例资源十二", category: "category-6", description: "第十二个示例资源，展示分页功能", tags: ["付费"], domestic: false, rating: 4.5, features: ["分页浏览", "加载更多", "无限滚动"], icon: "fa-copy", url: "#", isNew: false, isPopular: true },
+            { id: 13, name: "示例资源十三", category: "category-7", description: "第十三个示例资源，展示响应式设计", tags: ["免费", "开源"], domestic: true, rating: 4.3, features: ["响应式布局", "移动端适配", "跨设备"], icon: "fa-mobile-alt", url: "#", isNew: true, isPopular: true },
+            { id: 14, name: "示例资源十四", category: "category-7", description: "第十四个示例资源，展示交互效果", tags: ["付费", "优质"], domestic: false, rating: 4.7, features: ["动画效果", "交互流畅", "用户体验"], icon: "fa-magic", url: "#", isNew: false, isPopular: true },
+            { id: 15, name: "示例资源十五", category: "category-8", description: "第十五个示例资源，展示完整功能", tags: ["免费"], domestic: true, rating: 4.0, features: ["基础功能", "易于上手", "快速入门"], icon: "fa-bolt", url: "#", isNew: false, isPopular: false },
+            { id: 16, name: "示例资源十六", category: "category-8", description: "第十六个示例资源，展示高级特性", tags: ["付费", "开源", "优质"], domestic: false, rating: 4.8, features: ["高级特性", "企业支持", "定制开发"], icon: "fa-crown", url: "#", isNew: true, isPopular: true }
+        ];
+
+        // 获取随机图标
+        function getRandomIcon() {
+            const icons = ["fa-globe", "fa-code", "fa-paint-brush", "fa-server", "fa-database", 
+                          "fa-shield-alt", "fa-rocket", "fa-chart-line", "fa-cogs", "fa-bolt",
+                          "fa-cloud", "fa-link", "fa-tachometer-alt", "fa-wrench", "fa-tools",
+                          "fa-search", "fa-lock", "fa-sync", "fa-bolt", "fa-star"];
+            return icons[Math.floor(Math.random() * icons.length)];
+        }
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            initLanguageSwitcher();
+            renderCategories();
+            filterAndRenderTools();
+            initSearch();
+            initFilters();
+        });
+
+        // 初始化语言切换
+        function initLanguageSwitcher() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            langButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 更新活动按钮
+                    langButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 更新语言
+                    currentLang = this.getAttribute('data-lang');
+                    
+                    // 更新页面文本
+                    updatePageText();
+                    
+                    // 重新渲染工具（以更新语言）
+                    filterAndRenderTools();
+                });
+            });
+        }
+
+        // 更新页面文本
+        function updatePageText() {
+            const langData = translations[currentLang];
+            
+            // 更新主要文本
+            document.getElementById('main-title').textContent = langData['main-title'];
+            document.getElementById('sub-title').textContent = langData['sub-title'];
+            document.getElementById('category-title').textContent = langData['category-title'];
+            document.getElementById('search-input').placeholder = langData['search-placeholder'];
+            
+            // 更新"查看全部"链接
+            const viewAllLink = document.querySelector('.view-all span');
+            if (viewAllLink) {
+                viewAllLink.textContent = langData['view-all'];
+            }
+            
+            // 更新搜索筛选按钮
+            updateFilterButtonsText();
+            
+            // 更新分类按钮文本（第一个按钮）
+            const firstCategoryBtn = document.querySelector('.category-btn');
+            if (firstCategoryBtn && firstCategoryBtn.getAttribute('data-category') === 'all') {
+                firstCategoryBtn.querySelector('span').textContent = langData['all-tools'];
+            }
+            
+            // 更新工具卡片中的文本
+            updateToolCardsText();
+            
+            // 更新结果信息
+            updateResultsInfo();
+        }
+
+        // 更新筛选按钮文本
+        function updateFilterButtonsText() {
+            const langData = translations[currentLang];
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                const filterType = button.getAttribute('data-filter');
+                button.textContent = langData[`filter-${filterType}`];
+            });
+        }
+
+        // 更新工具卡片文本
+        function updateToolCardsText() {
+            const langData = translations[currentLang];
+            const viewDetailsBtns = document.querySelectorAll('.tool-link');
+            
+            viewDetailsBtns.forEach(btn => {
+                btn.innerHTML = `<i class="fas fa-external-link-alt"></i> ${langData['view-details']}`;
+            });
+            
+            // 更新标签文本
+            const tags = document.querySelectorAll('.tool-tag');
+            tags.forEach(tag => {
+                const originalText = tag.textContent;
+                if (langData[originalText]) {
+                    tag.textContent = langData[originalText];
+                }
+            });
+        }
+
+        // 渲染分类
+        function renderCategories() {
+            const container = document.getElementById('categories-container');
+            const langData = translations[currentLang];
+            
+            // 清空容器
+            container.innerHTML = '';
+            
+            // 添加"全部"按钮
+            const allButton = document.createElement('button');
+            allButton.className = 'category-btn active';
+            allButton.setAttribute('data-category', 'all');
+            allButton.innerHTML = `<i class="fas fa-th"></i> <span>${langData['all-tools']}</span>`;
+            allButton.addEventListener('click', function() {
+                document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                currentCategory = 'all';
+                filterAndRenderTools();
+            });
+            container.appendChild(allButton);
+            
+            // 添加分类按钮
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'category-btn';
+                button.setAttribute('data-category', category.id);
+                button.innerHTML = `<i class="fas ${category.icon}"></i> <span>${category.name}</span>`;
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = category.id;
+                    filterAndRenderTools();
+                });
+                container.appendChild(button);
+            });
+        }
+
+        // 初始化筛选器
+        function initFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 更新活动按钮
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 更新筛选类型
+                    currentFilter = this.getAttribute('data-filter');
+                    
+                    // 筛选并渲染工具
+                    filterAndRenderTools();
+                });
+            });
+        }
+
+        // 筛选并渲染工具
+        function filterAndRenderTools() {
+            let filtered = [...allTools];
+            
+            // 应用分类筛选
+            if (currentCategory !== 'all') {
+                filtered = filtered.filter(tool => tool.category === currentCategory);
+            }
+            
+            // 应用类型筛选
+            if (currentFilter !== 'all') {
+                switch(currentFilter) {
+                    case 'domestic':
+                        filtered = filtered.filter(tool => tool.domestic);
+                        break;
+                    case 'free':
+                        filtered = filtered.filter(tool => tool.tags.includes('免费') || tool.tags.includes('开源'));
+                        break;
+                    case 'new':
+                        filtered = filtered.filter(tool => tool.isNew);
+                        break;
+                    case 'popular':
+                        filtered = filtered.filter(tool => tool.isPopular);
+                        break;
+                }
+            }
+            
+            // 应用搜索筛选
+            if (currentSearchTerm.trim() !== '') {
+                const searchTerm = currentSearchTerm.toLowerCase();
+                filtered = filtered.filter(tool => 
+                    tool.name.toLowerCase().includes(searchTerm) ||
+                    tool.description.toLowerCase().includes(searchTerm) ||
+                    tool.tags.some(tag => tag.toLowerCase().includes(searchTerm)) ||
+                    tool.features.some(feature => feature.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            // 保存筛选结果
+            filteredTools = filtered;
+            
+            // 更新结果信息
+            updateResultsInfo();
+            
+            // 重置到第一页
+            currentPage = 1;
+            
+            // 渲染工具和分页
+            renderTools();
+            renderPagination();
+        }
+
+        // 更新结果信息
+        function updateResultsInfo() {
+            const langData = translations[currentLang];
+            const totalTools = filteredTools.length;
+            const infoElement = document.getElementById('search-results-info');
+            
+            // 更新工具总数显示
+            document.getElementById('tools-count').textContent = totalTools;
+            
+            // 更新结果信息文本
+            infoElement.innerHTML = `${langData['showing-results'].replace('{count}', totalTools)}`;
+            
+            // 如果没有结果，显示提示
+            if (totalTools === 0) {
+                infoElement.innerHTML += ` - <span style="color: var(--danger-color)">${langData['no-results']}</span>`;
+            }
+        }
+
+        // 渲染工具
+        function renderTools() {
+            const container = document.getElementById('tools-container');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const langData = translations[currentLang];
+            
+            // 显示加载指示器
+            loadingIndicator.classList.remove('hidden');
+            container.innerHTML = '';
+            
+            // 模拟加载延迟
+            setTimeout(() => {
+                // 计算当前页的工具
+                const startIndex = (currentPage - 1) * toolsPerPage;
+                const endIndex = startIndex + toolsPerPage;
+                const toolsToShow = filteredTools.slice(startIndex, endIndex);
+                
+                if (toolsToShow.length === 0) {
+                    container.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                            <i class="fas fa-search" style="font-size: 48px; color: var(--text-secondary); margin-bottom: 20px;"></i>
+                            <h3 style="color: var(--text-color); margin-bottom: 10px;">${langData['no-results']}</h3>
+                            <p style="color: var(--text-secondary);">尝试调整搜索词或筛选条件</p>
+                        </div>
+                    `;
+                } else {
+                    // 渲染工具卡片
+                    toolsToShow.forEach(tool => {
+                        const toolCard = document.createElement('div');
+                        toolCard.className = 'tool-card';
+                        
+                        // 处理标签 - 高亮搜索词
+                        const tagsHTML = tool.tags.map(tag => {
+                            const tagText = langData[tag] || tag;
+                            const highlightedTag = highlightSearchTerm(tagText);
+                            const tagClass = tag === '优质' || tag === 'Premium' ? 'domestic' : 
+                                            tag === '免费' || tag === 'Free' ? 'free' : 
+                                            tag === '付费' || tag === 'Paid' ? 'paid' : '';
+                            return `<span class="tool-tag ${tagClass}">${highlightedTag}</span>`;
+                        }).join('');
+                        
+                        // 处理特性列表
+                        const featuresHTML = tool.features.map(feature => 
+                            `<li><i class="fas fa-check"></i> ${highlightSearchTerm(feature)}</li>`
+                        ).join('');
+                        
+                        // 处理名称和描述 - 高亮搜索词
+                        const toolName = highlightSearchTerm(tool.name);
+                        const toolDesc = highlightSearchTerm(tool.description);
+                        
+                        toolCard.innerHTML = `
+                            <div class="tool-card-header">
+                                <div class="tool-icon">
+                                    <i class="fas ${tool.icon}"></i>
+                                </div>
+                                <div class="tool-info">
+                                    <div class="tool-title-row">
+                                        <div class="tool-title">${toolName}</div>
+                                        ${tool.domestic ? '<div class="tool-badge">优质</div>' : ''}
+                                    </div>
+                                    <div class="tool-desc">${toolDesc}</div>
+                                </div>
+                            </div>
+                            <div class="tool-card-body">
+                                <div class="tool-meta">${tagsHTML}</div>
+                                <ul class="tool-features">${featuresHTML}</ul>
+                            </div>
+                            <div class="tool-card-footer">
+                                <div class="tool-actions">
+                                    <a href="${tool.url}" target="_blank" class="tool-link">
+                                        <i class="fas fa-external-link-alt"></i> ${langData['view-details']}
+                                    </a>
+                                </div>
+                                <div class="tool-rating">
+                                    <i class="fas fa-star"></i> ${tool.rating}
+                                </div>
+                            </div>
+                        `;
+                        
+                        container.appendChild(toolCard);
+                    });
+                }
+                
+                // 隐藏加载指示器
+                loadingIndicator.classList.add('hidden');
+            }, 300); // 300ms模拟加载时间
+        }
+
+        // 高亮搜索词
+        function highlightSearchTerm(text) {
+            if (!currentSearchTerm.trim()) return text;
+            
+            const searchTerm = currentSearchTerm.toLowerCase();
+            const textLower = text.toLowerCase();
+            
+            // 如果文本中包含搜索词
+            if (textLower.includes(searchTerm)) {
+                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                return text.replace(regex, '<span class="highlight">$1</span>');
+            }
+            
+            return text;
+        }
+
+        // 渲染分页
+        function renderPagination() {
+            const container = document.getElementById('pagination');
+            const totalPages = Math.ceil(filteredTools.length / toolsPerPage);
+            
+            // 清空容器
+            container.innerHTML = '';
+            
+            // 如果只有一页或没有结果，不显示分页
+            if (totalPages <= 1 || filteredTools.length === 0) return;
+            
+            // 添加上一页按钮
+            const prevButton = document.createElement('button');
+            prevButton.className = 'page-btn';
+            prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevButton.disabled = currentPage === 1;
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderTools();
+                    renderPagination();
+                    window.scrollTo({ top: document.querySelector('.categories-section').offsetTop - 100, behavior: 'smooth' });
+                }
+            });
+            container.appendChild(prevButton);
+            
+            // 添加页码按钮
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            // 调整起始页，确保显示maxVisiblePages个页码
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                pageButton.textContent = i;
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    renderTools();
+                    renderPagination();
+                    window.scrollTo({ top: document.querySelector('.categories-section').offsetTop - 100, behavior: 'smooth' });
+                });
+                container.appendChild(pageButton);
+            }
+            
+            // 添加下一页按钮
+            const nextButton = document.createElement('button');
+            nextButton.className = 'page-btn';
+            nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextButton.disabled = currentPage === totalPages;
+            nextButton.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderTools();
+                    renderPagination();
+                    window.scrollTo({ top: document.querySelector('.categories-section').offsetTop - 100, behavior: 'smooth' });
+                }
+            });
+            container.appendChild(nextButton);
+        }
+
+        // 初始化搜索功能
+        function initSearch() {
+            const searchInput = document.getElementById('search-input');
+            let searchTimeout;
+            
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                
+                // 防抖处理，避免频繁搜索
+                searchTimeout = setTimeout(() => {
+                    currentSearchTerm = this.value.trim();
+                    filterAndRenderTools();
+                }, 300);
+            });
+        }
+    </script>
+</body>
+</html>
